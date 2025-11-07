@@ -14,8 +14,11 @@ test('Login as Organizer and create event', async ({page})=>{
 
     await page.fill('input[name="title"]','Automated Test Event')
     
-    await page.locator('p[contenteditable="true"]').click(); // focus first
-    await page.keyboard.type('This is an automated event created by Playwright');
+    const editor = page.locator('.ql-editor[contenteditable="true"]')
+    await editor.waitFor()
+    await editor.click()
+    await page.keyboard.type('This is an automated event created by Playwright')
+
     
     await page.fill('input[name="start_date"]','2026-03-01T16:00')
     await page.fill('input[name="end_date"]','2026-03-01T23:00')
